@@ -22,16 +22,12 @@ public class NewBehaviourScript : MonoBehaviour
     public bool switch1Target;
     public bool switch2Target;
     public bool switch3Target;
-    public bool switchAMFMTarget;
 
     public bool rightChannel;
     public bool ghostCorrect;
     public int frequencyCurrent;
     public int staticStrength;
 
-    public int ghostTimer; // WHEN YOU LINK THIS, SET UP RESETTING THE TIMER ON SUCCESS
-    public int batteryPoints;
-    public bool playerDead = false;
     public int ghostsKilled;
 
     public System.Random rnd = new System.Random();
@@ -40,24 +36,16 @@ public class NewBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        batteryPoints = 3;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ghostTimer == 0)
-        {
-            batteryPoints--;
-        }
-        if (batteryPoints == 0)
-        {
-            playerDead = true;
-        }
-
-
+        //set to false so we're not still saying we win from the last ghost
+        ghostCorrect = false;
         //check if the current switch position matches the target position, and if so call a new ghost and frequency
-        if (switch0 == switch0Target && switch1 == switch1Target && switch2 == switch2Target && switch3 == switch3Target && switchAMFM == switchAMFMTarget)
+        if (switch0 == switch0Target && switch1 == switch1Target && switch2 == switch2Target && switch3 == switch3Target && switchAMFM == true)
         {
             ghostCorrect = true;
             callGhost = true;
@@ -79,7 +67,6 @@ public class NewBehaviourScript : MonoBehaviour
                 switch1Target = false;
                 switch2Target = false;
                 switch3Target = false;
-                switchAMFM = false;
             }
             if (ghostRandom == 1)
             {
@@ -88,7 +75,6 @@ public class NewBehaviourScript : MonoBehaviour
                 switch1Target = false;
                 switch2Target = false;
                 switch3Target = false;
-                switchAMFM = false;
             }
             if (ghostRandom == 2)
             {
@@ -97,7 +83,6 @@ public class NewBehaviourScript : MonoBehaviour
                 switch1Target = false;
                 switch2Target = false;
                 switch3Target = false;
-                switchAMFM = false;
             }
             if (ghostRandom == 3)
             {
@@ -106,7 +91,6 @@ public class NewBehaviourScript : MonoBehaviour
                 switch1Target = false;
                 switch2Target = false;
                 switch3Target = false;
-                switchAMFM = false;
             }
             if (ghostRandom == 4)
             {
@@ -115,7 +99,6 @@ public class NewBehaviourScript : MonoBehaviour
                 switch1Target = false;
                 switch2Target = false;
                 switch3Target = false;
-                switchAMFM = false;
             }
             if (ghostRandom == 5)
             {
@@ -124,7 +107,6 @@ public class NewBehaviourScript : MonoBehaviour
                 switch1Target = false;
                 switch2Target = false;
                 switch3Target = false;
-                switchAMFM = false;
             }
             if (ghostRandom == 6)
             {
@@ -133,7 +115,6 @@ public class NewBehaviourScript : MonoBehaviour
                 switch1Target = false;
                 switch2Target = false;
                 switch3Target = false;
-                switchAMFM = false;
             }
         }
         //randomly select a number for the ghost's frequency
