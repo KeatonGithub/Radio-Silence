@@ -18,16 +18,25 @@ public class VisualizerScript : MonoBehaviour {
 	AudioSource audioSource;
 
 	// Use this for initialization
-	void Start () {
-		visualizerObjects = GetComponentsInChildren<VisualizerObjectScript> ();
+	void Start ()
+    {
+        visualizerObjects = GetComponentsInChildren<VisualizerObjectScript>();
 
-		if (!audioClip)
-			return;
+        if (!audioClip)
+            return;
 
-		audioSource = new GameObject ("_AudioSource").AddComponent <AudioSource> ();
-		audioSource.loop = loop;
-		audioSource.clip = audioClip;
-		audioSource.Play ();
+        audioSource = new GameObject("_AudioSource").AddComponent<AudioSource>();
+        audioSource.loop = loop;
+    }
+
+    public void PlaySound()
+    {
+        audioSource.clip = audioClip;
+        audioSource.Play();
+    }
+	public void StopSound()
+	{
+		audioSource.Stop();
 	}
 
     // Update is called once per frame

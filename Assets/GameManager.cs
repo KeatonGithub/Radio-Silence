@@ -6,8 +6,21 @@ using TMPro;
 
 public class GameManager : MonoBehaviour //defining all the public variables to use with the gamemanage
 {
+    public static GameManager instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     //public Transform Spawnpoint;
-    public int LivesCounter = 3;
+    //public int LivesCounter = 3;
     public float TimeCounter = 300;
     public TextMeshProUGUI Timer;
     public TextMeshProUGUI ghostsExorcised;
@@ -24,29 +37,35 @@ public class GameManager : MonoBehaviour //defining all the public variables to 
         
     }
 
+
     // Update is called once per frame
     void Update()
     {
+       // if (SceneManager.GetActiveScene().name == "Loss")
+        //{
+        //    ghostsExorcised = GameObject.Find("FinalScore#").GetComponent<TextMeshProUGUI>();
+        //}
         //if (Input.GetKeyDown(KeyCode.R))//forces player respawn if you get stuck when you press r
         //{
-         //   RespawnP1();
-       // }
+        //   RespawnP1();
+        // }
 
-        if ( TimeCounter > 0) //this makes it so that when the timer hits zero you lose the game, it also counts down the timer
+        if (TimeCounter > 0) //this makes it so that when the timer hits zero you lose the game, it also counts down the timer
         {
             TimeCounter -= Time.deltaTime;
-           
-        } 
-       else if( TimeCounter < 0)
-        {
-           SceneManager.LoadScene("Loss");
-                    //LivesCounter -= 1;
+
         }
-
+        else if (TimeCounter < 0)
+        {
+            SceneManager.LoadScene("Loss");
+            //LivesCounter -= 1;
+        }
+        if (Timer != null)
+        { 
         Timer.text = "" + TimeCounter.ToString("F0");//these strings are whats outputted to the UI elements
-       // Money.text = "$" + Collected.ToString();//they are the money timer and lives tmp UI text
+                                                     // Money.text = "$" + Collected.ToString();//they are the money timer and lives tmp UI text
         ghostsExorcised.text = "" + ghostsKilled.ToString();
-
+    }
     }
     public void Collect() //adds 100 dollars when you collect a stack of cash
     {
