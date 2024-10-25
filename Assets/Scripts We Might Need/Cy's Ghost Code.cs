@@ -65,21 +65,21 @@ public class NewBehaviourScript : MonoBehaviour
                 //wisps
                 switch0Target = false;
                 switch1Target = false;
-                switch2Target = false;
+                switch2Target = true;
                 switch3Target = false;
             }
             if (ghostRandom == 1)
             {
                 //shadow
                 switch0Target = false;
-                switch1Target = false;
+                switch1Target = true;
                 switch2Target = false;
-                switch3Target = false;
+                switch3Target = true;
             }
             if (ghostRandom == 2)
             {
                 //poltergeist
-                switch0Target = false;
+                switch0Target = true;
                 switch1Target = false;
                 switch2Target = false;
                 switch3Target = false;
@@ -88,24 +88,24 @@ public class NewBehaviourScript : MonoBehaviour
             {
                 //wraith
                 switch0Target = false;
-                switch1Target = false;
-                switch2Target = false;
-                switch3Target = false;
+                switch1Target = true;
+                switch2Target = true;
+                switch3Target = true;
             }
             if (ghostRandom == 4)
             {
                 //oni
-                switch0Target = false;
-                switch1Target = false;
+                switch0Target = true;
+                switch1Target = true;
                 switch2Target = false;
-                switch3Target = false;
+                switch3Target = true;
             }
             if (ghostRandom == 5)
             {
                 //banshee
                 switch0Target = false;
-                switch1Target = false;
-                switch2Target = false;
+                switch1Target = true;
+                switch2Target = true;
                 switch3Target = false;
             }
             if (ghostRandom == 6)
@@ -113,8 +113,8 @@ public class NewBehaviourScript : MonoBehaviour
                 //covenant
                 switch0Target = false;
                 switch1Target = false;
-                switch2Target = false;
-                switch3Target = false;
+                switch2Target = true;
+                switch3Target = true;
             }
         }
         //randomly select a number for the ghost's frequency
