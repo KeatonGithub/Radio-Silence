@@ -54,7 +54,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
 
         //randomly select ghost and find the target switch combination for that ghost
-        if (callGhost == true)
+        if (callGhost == true && switchAMFM == false)
         {
             callGhost = false;
             ghostRandom = rnd.Next(0, 6);
@@ -118,7 +118,7 @@ public class NewBehaviourScript : MonoBehaviour
             }
         }
         //randomly select a number for the ghost's frequency
-        if (callFrequency == true)
+        if (callFrequency == true && switchAMFM == false)
         {
             callFrequency = false;
 
