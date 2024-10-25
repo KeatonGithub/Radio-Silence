@@ -10,8 +10,10 @@ public class GameManager : MonoBehaviour //defining all the public variables to 
     public int LivesCounter = 3;
     public float TimeCounter = 300;
     public TextMeshProUGUI Timer;
+    public TextMeshProUGUI ghostsExorcised;
+    public int ghostsKilled;
     //public TextMeshProUGUI Money;
-    public TextMeshProUGUI Lives;
+    //public TextMeshProUGUI Lives;
 	//public TextMeshProUGUI Speed;
 	//public GameObject Player;
     //public bool winning;
@@ -33,15 +35,18 @@ public class GameManager : MonoBehaviour //defining all the public variables to 
         if ( TimeCounter > 0) //this makes it so that when the timer hits zero you lose the game, it also counts down the timer
         {
             TimeCounter -= Time.deltaTime;
+           
         } 
        else if( TimeCounter < 0)
         {
-            SceneManager.LoadScene("Loss");
+           SceneManager.LoadScene("Loss");
+                    //LivesCounter -= 1;
         }
 
         Timer.text = "" + TimeCounter.ToString("F0");//these strings are whats outputted to the UI elements
        // Money.text = "$" + Collected.ToString();//they are the money timer and lives tmp UI text
-        Lives.text = "" + LivesCounter.ToString();
+        ghostsExorcised.text = "" + ghostsKilled.ToString();
+
     }
     public void Collect() //adds 100 dollars when you collect a stack of cash
     {
@@ -49,13 +54,13 @@ public class GameManager : MonoBehaviour //defining all the public variables to 
     }
     public void RespawnP1() //this class causes the player to go to the loss scene when they are out of lives it also the respawns the player if they still have lives left
     {
-        LivesCounter -= 1;
+       // LivesCounter -= 1;
         //Player.transform.position=Spawnpoint.transform.position;
        //transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        if (LivesCounter < 0 == false)
-        {
-            SceneManager.LoadScene("Loss");
-        }
+       // if (LivesCounter < 0 == false)
+        //{
+           // SceneManager.LoadScene("Loss");
+       // }
     }
 }
