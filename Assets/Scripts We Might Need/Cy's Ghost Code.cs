@@ -184,6 +184,15 @@ public class NewBehaviourScript : MonoBehaviour
             switchAMFM = true;
         }
 
+        if (frequencyCurrent <= 50 && Input.GetKey(KeyCode.D))
+        {
+            frequencyCurrent++;
+        }
+        if (frequencyCurrent >= 1 && Input.GetKey(KeyCode.A))
+        {
+            frequencyCurrent--;
+        }
+
     }
 
     
