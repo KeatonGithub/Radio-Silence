@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour //defining all the public variables to 
     public float TimeCounter = 300;
     public TextMeshProUGUI Timer;
     public TextMeshProUGUI ghostsExorcised;
+    //public TextMeshProUGUI frequency;
     public int ghostsKilled;
     //public TextMeshProUGUI Money;
     //public TextMeshProUGUI Lives;
@@ -65,6 +66,8 @@ public class GameManager : MonoBehaviour //defining all the public variables to 
         Timer.text = "" + TimeCounter.ToString("F0");//these strings are whats outputted to the UI elements
                                                      // Money.text = "$" + Collected.ToString();//they are the money timer and lives tmp UI text
         ghostsExorcised.text = "" + ghostsKilled.ToString();
+        //f
+
     }
     }
     public void Collect() //adds 100 dollars when you collect a stack of cash

@@ -32,7 +32,10 @@ public class NewBehaviourScript : MonoBehaviour
     public int switch0Buffer, switch1Buffer, switch2Buffer, switch3Buffer, switch4Buffer;
 
     public GameObject[] ghostsVisualizers;
+    public AudioClip[] audioClips;
     public GameObject staticRef;
+
+    public GameObject visualizer;
 
     public System.Random rnd = new System.Random();
 
@@ -53,9 +56,11 @@ public class NewBehaviourScript : MonoBehaviour
         //check if the current switch position matches the target position, and if so call a new ghost and frequency
         if (switch0 == switch0Target && switch1 == switch1Target && switch2 == switch2Target && switch3 == switch3Target && switchAMFM == true)
         {
+            staticRef.GetComponent<AudioSource>().Stop();
             ghostCorrect = true;
             callGhost = true;
             callFrequency = true;
+            //ghostRandom = rnd.Next(0, 6);
             ghostsKilled++;
         }
 
@@ -63,9 +68,10 @@ public class NewBehaviourScript : MonoBehaviour
         //randomly select ghost and find the target switch combination for that ghost
         if (callGhost == true)
         {
-            callGhost = false;
+            //callGhost = false;
             ghostRandom = rnd.Next(0, 6);
 
+            visualizer.GetComponent<VisualizerScript>().audioClip = audioClips[ghostRandom];
 
             if (ghostRandom == 0)
             {
@@ -80,7 +86,8 @@ public class NewBehaviourScript : MonoBehaviour
                     ghost.SetActive(false);
                 }
 
-                ghostsVisualizers[ghostRandom].SetActive(true);
+                ghostsVisualizers[0].SetActive(true);
+                
             }
             if (ghostRandom == 1)
             {
@@ -94,7 +101,7 @@ public class NewBehaviourScript : MonoBehaviour
                     ghost.SetActive(false);
                 }
 
-                ghostsVisualizers[ghostRandom].SetActive(true);
+                ghostsVisualizers[1].SetActive(true);
             }
             if (ghostRandom == 2)
             {
@@ -108,7 +115,7 @@ public class NewBehaviourScript : MonoBehaviour
                     ghost.SetActive(false);
                 }
 
-                ghostsVisualizers[ghostRandom].SetActive(true);
+                ghostsVisualizers[2].SetActive(true);
             }
             if (ghostRandom == 3)
             {
@@ -122,7 +129,7 @@ public class NewBehaviourScript : MonoBehaviour
                     ghost.SetActive(false);
                 }
 
-                ghostsVisualizers[ghostRandom].SetActive(true);
+                ghostsVisualizers[3].SetActive(true);
             }
             if (ghostRandom == 4)
             {
@@ -135,7 +142,7 @@ public class NewBehaviourScript : MonoBehaviour
                     ghost.SetActive(false);
                 }
 
-                ghostsVisualizers[ghostRandom].SetActive(true);
+                ghostsVisualizers[4].SetActive(true);
             }
             if (ghostRandom == 5)
             {
@@ -148,7 +155,7 @@ public class NewBehaviourScript : MonoBehaviour
                     ghost.SetActive(false);
                 }
 
-                ghostsVisualizers[ghostRandom].SetActive(true);
+                ghostsVisualizers[5].SetActive(true);
             }
             if (ghostRandom == 6)
             {
@@ -161,53 +168,34 @@ public class NewBehaviourScript : MonoBehaviour
                     ghost.SetActive(false);
                 }
 
-                ghostsVisualizers[ghostRandom].SetActive(true);
+                ghostsVisualizers[6].SetActive(true);
             }
+            callGhost = false;
         }
         //randomly select a number for the ghost's frequency
         if (callFrequency == true && switchAMFM == false)
         {
+
+            frequencyRandom = rnd.Next(0, 30);
             callFrequency = false;
 
             // what frequency the player needs to target 
 
-            frequencyRandom = rnd.Next(0, 50);
+            //frequencyRandom = rnd.Next(0, 30);
         }
 
         //based on the current frequency, find how strong the static should be.
         //if youre on the right channel, say you're on the right channel.
-        if (frequencyCurrent == frequencyRandom)
+        if (frequencyCurrent > frequencyRandom - 3 && frequencyCurrent < frequencyRandom + 3)
         {
-            rightChannel = true;
+            staticRef.GetComponent<AudioSource>().Play();
             ghostsVisualizers[ghostRandom].GetComponent<VisualizerScript>().PlaySound();
-            //staticRef.GetComponent<AudioSource>().Stop();
-        }
-        else if (frequencyCurrent > frequencyRandom - 3 | frequencyCurrent < frequencyRandom + 3)
-        {
-            staticStrength = 1;
-            staticRef.GetComponent<AudioSource>().Play();
-        }
-        else if (frequencyCurrent > frequencyRandom - 5 | frequencyCurrent < frequencyRandom + 5)
-        {
-            staticStrength = 2;
-            staticRef.GetComponent<AudioSource>().Play();
-        }
-        else if (frequencyCurrent > frequencyRandom - 7 | frequencyCurrent < frequencyRandom + 7)
-        {
-            staticStrength = 3;
-            staticRef.GetComponent<AudioSource>().Play();
-        }
-        else if (frequencyCurrent > frequencyRandom - 10 | frequencyCurrent < frequencyRandom + 10)
-        {
-            staticStrength = 4;
-            staticRef.GetComponent<AudioSource>().Play();
         }
         else
         {
-            staticStrength = 5;
-            staticRef.GetComponent<AudioSource>().Play();
-            ghostsVisualizers[ghostRandom].GetComponent<VisualizerScript>().StopSound();
+            staticRef.GetComponent<AudioSource>().Stop();
         }
+
 
 
         // the following code is disgusting, i am sorry.
@@ -240,11 +228,11 @@ public class NewBehaviourScript : MonoBehaviour
             switch4Buffer = 200;
         }
 
-        if (frequencyCurrent <= 50 && Input.GetKey(KeyCode.D))
+        if (frequencyCurrent < 30 && Input.GetKey(KeyCode.D))
         {
             frequencyCurrent++;
         }
-        if (frequencyCurrent >= 1 && Input.GetKey(KeyCode.A))
+        if (frequencyCurrent > 1 && Input.GetKey(KeyCode.A))
         {
             frequencyCurrent--;
         }
@@ -290,6 +278,8 @@ public class NewBehaviourScript : MonoBehaviour
                 switchAMFM = false;
             }
         }
+
+
     }
 
 

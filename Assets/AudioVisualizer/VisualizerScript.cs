@@ -32,7 +32,7 @@ public class VisualizerScript : MonoBehaviour {
     public void PlaySound()
     {
         audioSource.clip = audioClip;
-        audioSource.Play();
+		audioSource.PlayOneShot(audioClip);
     }
 	public void StopSound()
 	{
